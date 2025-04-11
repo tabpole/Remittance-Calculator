@@ -7,23 +7,31 @@ import 'package:remittance_calculator/feature/home/input/target_amount_input.dar
 import '../input/transaction_fee_input.dart';
 
 class HomeForm extends StatelessWidget {
-  const HomeForm({super.key});
-
+  HomeForm({super.key});
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FromAmountInput(),
-        const SizedBox(height: 16),
-        TransactionFeeInput(),
-        const SizedBox(height: 16),
-        CurrencyRateInput(),
-        const SizedBox(height: 16),
-        IncentiveInput(),
-        const SizedBox(height: 16),
-        TargetAmountInput(),
-      ],
+    TextEditingController fromAmountController = TextEditingController();
+    TextEditingController transactionFeeController = TextEditingController();
+    TextEditingController currencyRateController = TextEditingController();
+    TextEditingController incentiveController = TextEditingController();
+    TextEditingController targetAmountController = TextEditingController();
+    return Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FromAmountInput(controller: fromAmountController),
+          const SizedBox(height: 16),
+          TransactionFeeInput(controller: transactionFeeController),
+          const SizedBox(height: 16),
+          CurrencyRateInput(controller: currencyRateController),
+          const SizedBox(height: 16),
+          IncentiveInput(controller: incentiveController),
+          const SizedBox(height: 16),
+          TargetAmountInput(controller: targetAmountController),
+        ],
+      ),
     );
   }
 }

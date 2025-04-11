@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:remittance_calculator/widget/atom/input.dart';
 
 class TargetAmountInput extends StatelessWidget {
-  const TargetAmountInput({super.key});
+  final TextEditingController controller;
+
+  const TargetAmountInput({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:remittance_calculator/widget/atom/input.dart';
 
 class FromAmountInput extends StatelessWidget {
-  const FromAmountInput({super.key});
+  final TextEditingController controller;
+  const FromAmountInput({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController(text: '100');
+    controller.text = '100';
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
