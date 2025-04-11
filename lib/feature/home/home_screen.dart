@@ -16,8 +16,10 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             HomeTitle(),
+            const SizedBox(height: 32),
             HomeForm(),
           ],
         ),

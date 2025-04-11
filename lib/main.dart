@@ -1,24 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remittance_calculator/feature/home/home_screen.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 void main() {
   runApp(
     ProviderScope(
-      child: App(),
+      child: ShadcnApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Remittance Calculator',
+        theme: ThemeData(
+          colorScheme: ColorSchemes.darkSlate(),
+          radius: 0.5,
+        ),
+        builder: (context, child) {
+          return DrawerOverlay(
+            child: child ?? const SizedBox(),
+          );
+        },
+        home: const HomeScreen(),
+      ),
     ),
   );
-}
-
-class App extends StatelessWidget {
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Remittance Calculator',
-      home: const HomeScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
 }
