@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_flutter/shadcn_flutter.dart' as shadcn;
+import 'package:remittance_calculator/feature/home/section/home_form.dart';
+import 'package:remittance_calculator/feature/home/section/home_title.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Scaffold(
-        body: Center(
-          child: shadcn.Avatar(
-            backgroundColor: Colors.red, // Use Flutter's Colors
-            initials: shadcn.Avatar.getInitials('sunarya-thito'),
-            provider: const NetworkImage('https://avatars.githubusercontent.com/u/64018564?v=4'),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Remittance Calculator"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeTitle(),
+            HomeForm(),
+          ],
         ),
       ),
     );

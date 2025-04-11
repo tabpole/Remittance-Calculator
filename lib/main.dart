@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shadcn_flutter/shadcn_flutter.dart' as shadcn;
-
-import 'feature/home/home_screen.dart';
+import 'package:remittance_calculator/feature/home/home_screen.dart';
 
 void main() {
   runApp(
     ProviderScope(
-      child: shadcn.ShadcnApp(
-        title: 'My App',
-        home: const HomeScreen(),
-        theme: shadcn.ThemeData(
-          colorScheme: shadcn.ColorSchemes.darkGreen(),
-          radius: 0.5,
-        ),
-        debugShowCheckedModeBanner: false,
-      ),
+      child: App(),
     ),
   );
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Remittance Calculator',
+      home: const HomeScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
 }
