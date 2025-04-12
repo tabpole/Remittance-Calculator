@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:remittance_calculator/feature/home/section/home_form.dart';
-import 'package:remittance_calculator/feature/home/section/home_title.dart';
+import 'package:remittance_calculator/feature/home/receiving/receiving_screen.dart';
+import 'package:remittance_calculator/feature/home/sending/sending_screen.dart';
+import 'package:remittance_calculator/feature/home/setup/setup_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Remittance Calculator"),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 64),
-              HomeTitle(),
-              const SizedBox(height: 32),
-              HomeForm(),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            "Remittance Calculator",
+            style: TextStyle(fontSize: 16),
+          ),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: "Sending"),
+              Tab(text: "Receiving"),
+              Tab(text: "Setup"),
             ],
           ),
+        ),
+        body: TabBarView(
+          children: [
+            SendingSereen(),
+            ReceivingScreen(),
+            SetupScreen(),
+          ],
         ),
       ),
     );

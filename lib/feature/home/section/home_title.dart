@@ -13,10 +13,6 @@ class HomeTitle extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
-          child: const Text("Calculation Summary"),
-        ),
-        const SizedBox(height: 16),
         InfoLine(
           title: "Sending",
           value: "${state['SENDING']} EUR",
