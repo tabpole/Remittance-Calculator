@@ -1,8 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:remittance_calculator/feature/home/home_screen.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive
+  await Hive.initFlutter();
+
   runApp(
     ProviderScope(
       child: ShadcnApp(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remittance_calculator/feature/home/receiving/receiving_screen.dart';
 import 'package:remittance_calculator/feature/home/sending/sending_screen.dart';
-import 'package:remittance_calculator/feature/home/setup/setup_screen.dart';
+import 'package:remittance_calculator/feature/home/set/set_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             SendingSereen(),
             ReceivingScreen(),
-            SetupScreen(),
+            SetScreen(),
           ],
         ),
       ),
