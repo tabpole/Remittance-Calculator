@@ -18,14 +18,11 @@ class SendingInput extends ConsumerWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       decoration: InputField.design.copyWith(
-        labelText: 'From',
+        labelText: 'Sending',
         suffixText: 'EUR',
       ),
       onChanged: (value) {
-        state.updateField(
-          'SENDING',
-          value.isNotEmpty ? double.tryParse(value) : 0.0,
-        );
+        if (value.isNotEmpty) state.updateField('SENDING', double.tryParse(value));
       },
     );
   }

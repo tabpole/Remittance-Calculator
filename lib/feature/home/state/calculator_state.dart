@@ -5,7 +5,7 @@ part 'calculator_state.g.dart';
 class CalculatorState extends _$CalculatorState {
   @override
   Map<String, double> build() => {
-        'SENDING': 100.0,
+        'SENDING': 0.0,
         'TRANSACTION_FEE': 5.0,
         'CURRENCY_RATE': 135.5,
         'INCENTIVE_RATE': 2.5,
@@ -16,29 +16,18 @@ class CalculatorState extends _$CalculatorState {
 
   double? getField(String field) => state[field];
 
-  bool isSendingSelected = true;
+  bool sendingMood = true;
 
   void updateField(String field, dynamic value) {
     state = {...state, field: value};
-    if (field == 'SENDING') {
-      isSendingSelected = true;
-      calculateOnSending();
-    } else if (field == 'RECEIVING_TOTAL') {
-      isSendingSelected = false;
-      calculateOnReceiving();
-    } else {
-      calculateOnSending();
-    }
+    if (field == 'SENDING') sendingMood = true;
+    if (field == 'RECEIVING_TOTAL') sendingMood = false;
+    sendingMood ? calculateForSendingMood() : calculateForReceivingMood();
   }
 
-  void calculateOnSending() {
-    final sending = state['SENDING'] ?? 0.0;
-    final transactionFee = state['TRANSACTION_FEE'] ?? 0.0;
-    final currencyRate = state['CURRENCY_RATE'] ?? 0.0;
-    final incentiveRate = state['INCENTIVE_RATE'] ?? 0.0;
-
-    final receiving = ((sending - transactionFee) * currencyRate).toStringAsFixed(1);
-    final incentive = ((double.parse(receiving) * incentiveRate) / 100).toStringAsFixed(1);
+  void calculateForSendingMood() {
+    final receiving = ((state['SENDING']! - state['TRANSACTION_FEE']!) * state['CURRENCY_RATE']!).toStringAsFixed(1);
+    final incentive = ((double.parse(receiving) * state['INCENTIVE_RATE']!) / 100).toStringAsFixed(1);
     final receivingTotal = (double.parse(receiving) + double.parse(incentive)).toStringAsFixed(1);
 
     state = {
@@ -49,15 +38,10 @@ class CalculatorState extends _$CalculatorState {
     };
   }
 
-  void calculateOnReceiving() {
-    final receivingTotal = state['RECEIVING_TOTAL'] ?? 0.0;
-    final transactionFee = state['TRANSACTION_FEE'] ?? 0.0;
-    final currencyRate = state['CURRENCY_RATE'] ?? 0.0;
-    final incentiveRate = state['INCENTIVE_RATE'] ?? 0.0;
-
-    final receiving = (receivingTotal / (1 + (incentiveRate / 100))).toStringAsFixed(1);
-    final incentive = (receivingTotal - double.parse(receiving)).toStringAsFixed(1);
-    final sending = (((double.parse(receiving) / currencyRate) + transactionFee)).toStringAsFixed(1);
+  void calculateForReceivingMood() {
+    final receiving = (state['RECEIVING_TOTAL']! / (1 + (state['INCENTIVE_RATE']! / 100))).toStringAsFixed(1);
+    final incentive = (state['RECEIVING_TOTAL']! - double.parse(receiving)).toStringAsFixed(1);
+    final sending = (((double.parse(receiving) / state['CURRENCY_RATE']!) + state['TRANSACTION_FEE']!)).toStringAsFixed(1);
 
     state = {
       ...state,

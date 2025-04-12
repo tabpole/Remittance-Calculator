@@ -19,7 +19,7 @@ class ReceivingInput extends ConsumerWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       decoration: InputField.design.copyWith(
-        labelText: 'Total',
+        labelText: 'Receiving Total',
         suffixText: 'BDT',
       ),
       onChanged: (value) {
