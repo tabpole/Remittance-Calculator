@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             tabs: [
               Tab(text: "Sending"),
               Tab(text: "Receiving"),
-              Tab(text: "Setup"),
+              Tab(text: "Set"),
             ],
           ),
         ),
