@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remittance_calculator/widget/atom/input.dart';
-import 'package:remittance_calculator/feature/home/state/calculator_state.dart';
+import 'package:remittance_calculator/feature/home/sending/state/calculator_state.dart';
 
 class CurrencyRateInput extends ConsumerWidget {
   final TextEditingController controller;

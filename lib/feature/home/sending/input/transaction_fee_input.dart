@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:remittance_calculator/feature/home/state/calculator_state.dart';
 import 'package:remittance_calculator/widget/atom/input.dart';
+import 'package:remittance_calculator/feature/home/sending/state/calculator_state.dart';
 
-class IncentiveInput extends ConsumerWidget {
+class TransactionFeeInput extends ConsumerWidget {
   final TextEditingController controller;
-  const IncentiveInput({
+  const TransactionFeeInput({
     super.key,
     required this.controller,
   });
@@ -13,17 +13,17 @@ class IncentiveInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.read(calculatorStateProvider.notifier);
-    controller.text = state.getField('INCENTIVE_RATE').toString();
+    controller.text = state.getField('TRANSACTION_FEE').toString();
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
       decoration: InputField.design.copyWith(
-        labelText: 'Incentive',
-        suffixText: '%',
+        labelText: 'Transaction Fee',
+        suffixText: 'EUR',
       ),
       onChanged: (value) {
         state.updateField(
-          'INCENTIVE_RATE',
+          'TRANSACTION_FEE',
           value.isNotEmpty ? double.tryParse(value) : 0.0,
         );
       },

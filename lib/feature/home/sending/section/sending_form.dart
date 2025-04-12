@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:remittance_calculator/feature/home/input/currency_rate_input.dart';
-import 'package:remittance_calculator/feature/home/input/sending_input.dart';
-import 'package:remittance_calculator/feature/home/input/incentive_input.dart';
-import 'package:remittance_calculator/feature/home/input/receiving_input.dart';
+import 'package:remittance_calculator/feature/home/sending/input/currency_rate_input.dart';
+import 'package:remittance_calculator/feature/home/sending/input/sending_input.dart';
+import 'package:remittance_calculator/feature/home/sending/input/incentive_input.dart';
 
 import '../input/transaction_fee_input.dart';
 
-class HomeForm extends StatelessWidget {
-  HomeForm({super.key});
+class SendingForm extends StatelessWidget {
+  SendingForm({super.key});
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,6 @@ class HomeForm extends StatelessWidget {
     TextEditingController transactionFeeController = TextEditingController();
     TextEditingController currencyRateController = TextEditingController();
     TextEditingController incentiveController = TextEditingController();
-    TextEditingController targetAmountController = TextEditingController();
     return Form(
       key: formKey,
       child: Column(
@@ -28,8 +26,6 @@ class HomeForm extends StatelessWidget {
           CurrencyRateInput(controller: currencyRateController),
           const SizedBox(height: 16),
           IncentiveInput(controller: incentiveController),
-          const SizedBox(height: 16),
-          ReceivingInput(controller: targetAmountController),
         ],
       ),
     );
