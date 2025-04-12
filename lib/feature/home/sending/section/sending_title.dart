@@ -1,14 +1,14 @@
 import 'package:remittance_calculator/feature/home/widget/info_line.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:remittance_calculator/feature/home/sending/state/calculator_state.dart';
+import 'package:remittance_calculator/feature/home/sending/state/sending_calculator_state.dart';
 
 class HomeTitle extends ConsumerWidget {
   const HomeTitle({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(calculatorStateProvider);
+    final state = ref.watch(sendingCalculatorStateProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

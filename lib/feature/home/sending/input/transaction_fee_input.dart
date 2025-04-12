@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remittance_calculator/widget/atom/input.dart';
-import 'package:remittance_calculator/feature/home/sending/state/calculator_state.dart';
+import 'package:remittance_calculator/feature/home/sending/state/sending_calculator_state.dart';
 
 class TransactionFeeInput extends ConsumerWidget {
   final TextEditingController controller;
@@ -12,7 +12,7 @@ class TransactionFeeInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.read(calculatorStateProvider.notifier);
+    final state = ref.read(sendingCalculatorStateProvider.notifier);
     controller.text = state.getField('TRANSACTION_FEE').toString();
     return TextField(
       controller: controller,

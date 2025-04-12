@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'calculator_state.g.dart';
+part 'sending_calculator_state.g.dart';
 
 @riverpod
-class CalculatorState extends _$CalculatorState {
+class SendingCalculatorState extends _$SendingCalculatorState {
   @override
   Map<String, double> build() => {
         'SENDING': 0.0,
@@ -16,16 +16,13 @@ class CalculatorState extends _$CalculatorState {
 
   double? getField(String field) => state[field];
 
-  bool sendingMood = true;
-
   void updateField(String field, dynamic value) {
     state = {...state, field: value};
-    if (field == 'SENDING') sendingMood = true;
-    if (field == 'RECEIVING_TOTAL') sendingMood = false;
-    sendingMood ? calculateForSendingMood() : calculateForReceivingMood();
+
+    calculate();
   }
 
-  void calculateForSendingMood() {
+  void calculate() {
     final receiving = ((state['SENDING']! - state['TRANSACTION_FEE']!) * state['CURRENCY_RATE']!).toStringAsFixed(1);
     final incentive = ((double.parse(receiving) * state['INCENTIVE_RATE']!) / 100).toStringAsFixed(1);
     final receivingTotal = (double.parse(receiving) + double.parse(incentive)).toStringAsFixed(1);
@@ -35,19 +32,6 @@ class CalculatorState extends _$CalculatorState {
       'INCENTIVE': double.parse(incentive),
       'RECEIVING': double.parse(receiving),
       'RECEIVING_TOTAL': double.parse(receivingTotal),
-    };
-  }
-
-  void calculateForReceivingMood() {
-    final receiving = (state['RECEIVING_TOTAL']! / (1 + (state['INCENTIVE_RATE']! / 100))).toStringAsFixed(1);
-    final incentive = (state['RECEIVING_TOTAL']! - double.parse(receiving)).toStringAsFixed(1);
-    final sending = (((double.parse(receiving) / state['CURRENCY_RATE']!) + state['TRANSACTION_FEE']!)).toStringAsFixed(1);
-
-    state = {
-      ...state,
-      'SENDING': double.parse(sending),
-      'RECEIVING': double.parse(receiving),
-      'INCENTIVE': double.parse(incentive),
     };
   }
 }
