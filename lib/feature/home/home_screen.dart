@@ -12,16 +12,18 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text("Remittance Calculator"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            HomeTitle(),
-            const SizedBox(height: 32),
-            HomeForm(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              HomeTitle(),
+              const SizedBox(height: 32),
+              HomeForm(),
+            ],
+          ),
         ),
       ),
     );
