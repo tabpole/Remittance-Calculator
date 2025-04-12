@@ -1,37 +1,49 @@
 import 'package:remittance_calculator/feature/home/widget/info_line.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:remittance_calculator/feature/home/state/calculator_state.dart';
 
-class HomeTitle extends StatelessWidget {
+class HomeTitle extends ConsumerWidget {
   const HomeTitle({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(calculatorStateProvider);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: const Text("Caulation Summery"),
+          child: const Text("Calculation Summary"),
         ),
         const SizedBox(height: 16),
         InfoLine(
           title: "Sending",
-          value: "100 EUR",
+          value: "${state['SENDING']} EUR",
         ),
         InfoLine(
           title: "Transaction Fee",
-          value: "5 EUR",
+          value: "${state['TRANSACTION_FEE']} EUR",
         ),
         InfoLine(
           title: "Currency Rate",
-          value: "1 EUR = 130 BDT",
+          value: "1 EUR = ${state['CURRENCY_RATE']} BDT",
         ),
         InfoLine(
-          title: "Incentive",
-          value: "230 BDT",
+          title: "Incentive Rate",
+          value: "${state['INCENTIVE_RATE']}%",
         ),
         InfoLine(
           title: "Receiving",
-          value: "13000 BDT",
+          value: "${state['RECEIVING']} BDT",
+        ),
+        InfoLine(
+          title: "Incentive",
+          value: "${state['INCENTIVE']} BDT",
+        ),
+        InfoLine(
+          title: "Total Receiving",
+          value: "${state['RECEIVING_TOTAL']} BDT",
         ),
       ],
     );

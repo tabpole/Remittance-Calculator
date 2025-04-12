@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remittance_calculator/widget/atom/input.dart';
+import 'package:remittance_calculator/feature/home/state/calculator_state.dart';
 
-class FromAmountInput extends StatelessWidget {
+class FromAmountInput extends ConsumerWidget {
   final TextEditingController controller;
   const FromAmountInput({
     super.key,
@@ -9,12 +11,18 @@ class FromAmountInput extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    controller.text = '100';
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.read(calculatorStateProvider.notifier);
+    controller.text = state.getField('SENDING').toString();
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
-      onChanged: (value) {},
+      onChanged: (value) {
+        state.updateField(
+          'SENDING',
+          value.isNotEmpty ? double.tryParse(value) : 0.0,
+        );
+      },
       decoration: InputField.design.copyWith(
         labelText: 'From',
         suffixText: 'EUR',
