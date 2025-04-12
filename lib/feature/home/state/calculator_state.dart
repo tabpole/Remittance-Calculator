@@ -20,6 +20,8 @@ class CalculatorState extends _$CalculatorState {
       calculateOnSending();
     } else if (field == 'RECEIVING') {
       calculateOnReceiving();
+    } else if (field == 'RECEIVING_TOTAL') {
+      calculateOnReceivingTotal();
     } else {
       calculateOnSending();
     }
@@ -61,6 +63,24 @@ class CalculatorState extends _$CalculatorState {
       'SENDING': double.parse(sending),
       'INCENTIVE': double.parse(incentive),
       'RECEIVING_TOTAL': double.parse(receiving.toStringAsFixed(1)),
+    };
+  }
+
+  void calculateOnReceivingTotal() {
+    final receivingTotal = state['RECEIVING_TOTAL'] ?? 0.0;
+    final transactionFee = state['TRANSACTION_FEE'] ?? 0.0;
+    final currencyRate = state['CURRENCY_RATE'] ?? 0.0;
+    final incentiveRate = state['INCENTIVE_RATE'] ?? 0.0;
+
+    final receiving = (receivingTotal / (1 + (incentiveRate / 100))).toStringAsFixed(1);
+    final incentive = (receivingTotal - double.parse(receiving)).toStringAsFixed(1);
+    final sending = (((double.parse(receiving) / currencyRate) + transactionFee)).toStringAsFixed(1);
+
+    state = {
+      ...state,
+      'SENDING': double.parse(sending),
+      'RECEIVING': double.parse(receiving),
+      'INCENTIVE': double.parse(incentive),
     };
   }
 }

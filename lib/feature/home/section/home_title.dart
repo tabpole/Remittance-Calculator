@@ -30,10 +30,6 @@ class HomeTitle extends ConsumerWidget {
           value: "1 EUR = ${state['CURRENCY_RATE']} BDT",
         ),
         InfoLine(
-          title: "Incentive Rate",
-          value: "${state['INCENTIVE_RATE']}%",
-        ),
-        InfoLine(
           title: "Receiving",
           value: "${state['RECEIVING']} BDT",
         ),
