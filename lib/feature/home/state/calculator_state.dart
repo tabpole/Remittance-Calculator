@@ -14,21 +14,21 @@ class CalculatorState extends _$CalculatorState {
         'RECEIVING_TOTAL': 0.0,
       };
 
+  double? getField(String field) => state[field];
+
+  bool isSendingSelected = true;
+
   void updateField(String field, dynamic value) {
     state = {...state, field: value};
     if (field == 'SENDING') {
+      isSendingSelected = true;
       calculateOnSending();
-    } else if (field == 'RECEIVING') {
-      calculateOnReceiving();
     } else if (field == 'RECEIVING_TOTAL') {
-      calculateOnReceivingTotal();
+      isSendingSelected = false;
+      calculateOnReceiving();
     } else {
       calculateOnSending();
     }
-  }
-
-  dynamic getField(String field) {
-    return state[field];
   }
 
   void calculateOnSending() {
@@ -50,23 +50,6 @@ class CalculatorState extends _$CalculatorState {
   }
 
   void calculateOnReceiving() {
-    final receiving = state['RECEIVING'] ?? 0.0;
-    final transactionFee = state['TRANSACTION_FEE'] ?? 0.0;
-    final currencyRate = state['CURRENCY_RATE'] ?? 0.0;
-    final incentiveRate = state['INCENTIVE_RATE'] ?? 0.0;
-
-    final incentive = ((receiving * incentiveRate) / 100).toStringAsFixed(1);
-    final sending = (((receiving - double.parse(incentive)) / currencyRate) + transactionFee).toStringAsFixed(1);
-
-    state = {
-      ...state,
-      'SENDING': double.parse(sending),
-      'INCENTIVE': double.parse(incentive),
-      'RECEIVING_TOTAL': double.parse(receiving.toStringAsFixed(1)),
-    };
-  }
-
-  void calculateOnReceivingTotal() {
     final receivingTotal = state['RECEIVING_TOTAL'] ?? 0.0;
     final transactionFee = state['TRANSACTION_FEE'] ?? 0.0;
     final currencyRate = state['CURRENCY_RATE'] ?? 0.0;

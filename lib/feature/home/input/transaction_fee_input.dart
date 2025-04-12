@@ -17,16 +17,16 @@ class TransactionFeeInput extends ConsumerWidget {
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
+      decoration: InputField.design.copyWith(
+        labelText: 'Transaction Fee',
+        suffixText: 'EUR',
+      ),
       onChanged: (value) {
         state.updateField(
           'TRANSACTION_FEE',
           value.isNotEmpty ? double.tryParse(value) : 0.0,
         );
       },
-      decoration: InputField.design.copyWith(
-        labelText: 'Transaction Fee',
-        suffixText: 'EUR',
-      ),
     );
   }
 }

@@ -17,16 +17,16 @@ class IncentiveInput extends ConsumerWidget {
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
+      decoration: InputField.design.copyWith(
+        labelText: 'Incentive',
+        suffixText: '%',
+      ),
       onChanged: (value) {
         state.updateField(
           'INCENTIVE_RATE',
           value.isNotEmpty ? double.tryParse(value) : 0.0,
         );
       },
-      decoration: InputField.design.copyWith(
-        labelText: 'Incentive',
-        suffixText: '%',
-      ),
     );
   }
 }
